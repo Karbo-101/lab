@@ -5,6 +5,7 @@ class BuecherHandler(handler.ContentHandler):
     def __init__(self):
         self.authors = set()
         self.titles = set()
+        self.price = set()
         self.current_content = ""
 
     def startElement(self, name, attrs):
@@ -18,12 +19,17 @@ class BuecherHandler(handler.ContentHandler):
             self.titles.add(self.current_content)
         elif name == "author":
             self.authors.add(self.current_content)
+        elif name == "price":
+            self.price.add(self.current_content)
 
     def getTitles(self):
         return self.titles
 
     def getAuthors(self):
         return self.authors
+    
+    def getPrice(self):
+        return self.price
 
 
 parser = make_parser()
@@ -36,3 +42,6 @@ print(b.getAuthors())
 
 print("Titles:")
 print(b.getTitles())
+
+print("Prices:")
+print(b.getPrice())
